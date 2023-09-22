@@ -152,7 +152,7 @@ LOGGING = {
             'propagate': True,
         },
         'myapp': {
-            'handlers': ['console', 'file'],
+            'handlers': ['file'],
             'level': 'INFO',
             'propagate': True,
         },

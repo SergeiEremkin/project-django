@@ -7,7 +7,6 @@ from django.http import HttpResponse
 logger = logging.getLogger(__name__)
 
 
-
 def eagle(request):
     game_list = ['орел', 'решка']
     response = random.choice(game_list)
