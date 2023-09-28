@@ -40,3 +40,11 @@ class Article(models.Model):
     category = models.CharField(max_length=100)
     count_views = models.IntegerField(default=0)
     is_published = models.BooleanField(default=False)
+
+
+class Comment(models.Model):
+    author_id = models.ForeignKey(Author, on_delete=models.CASCADE)
+    article_id = models.ForeignKey(Article, on_delete=models.CASCADE)
+    description = models.CharField(max_length=300)
+    create_at = models.DateField(auto_now_add=True)
+    change_at = models.DateField(auto_now_add=True)
