@@ -1,11 +1,18 @@
+import datetime
+from datetime import date
+
 from django.http import HttpResponse
+from django.shortcuts import render
+
 from internet_shop.models import Client, Goods, Order
 
 
 def get_clients(request):
     clients = Client.objects.all()
-    context = '\n'.join(str(client) for client in clients)
-    return HttpResponse(context)
+    context = {
+        'clients': clients
+    }
+    return render(request, 'internet_shop/clients.html', context=context)
 
 
 def get_goods(request):
@@ -18,6 +25,19 @@ def get_orders(request):
     orders = Order.objects.all()
     context = '\n'.join(str(order) for order in orders)
     return HttpResponse(context)
+
+
+def get_client_goods(request, client_id: int):
+    COUNT_DAYS = 7
+    start = datetime.date.today() - datetime.timedelta(days=COUNT_DAYS)
+    client = Client.objects.get(id=client_id)
+    orders = Order.objects.filter(client_id=client_id, create_at__gte=start)
+    context = {
+        'count_days': COUNT_DAYS,
+        'client': client,
+        'orders': orders
+    }
+    return render(request, 'internet_shop/client_goods.html', context=context)
 
 
 def get_orders_by_client_id(request, client_id: int):
