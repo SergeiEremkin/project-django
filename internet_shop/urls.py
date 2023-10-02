@@ -4,6 +4,7 @@ from internet_shop import views
 urlpatterns = [
     path('clients/', views.get_clients, name='clients'),
     path('goods/', views.get_goods, name='goods'),
+    path('add_goods/', views.add_goods, name='add_goods'),
     path('orders/', views.get_orders, name='orders'),
     path('client_orders/<int:client_id>', views.get_orders_by_client_id, name='client_orders'),
     path('delete_client/<int:client_id>', views.delete_client, name='delete_client'),
