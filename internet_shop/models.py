@@ -16,8 +16,8 @@ class Goods(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
     image = models.ImageField(upload_to='images/')
-    price = models.IntegerField()
-    amount = models.IntegerField()
+    price = models.IntegerField(default=0)
+    amount = models.IntegerField(default=0)
     create_at = models.DateField(auto_now_add=True)
 
     def total_price(self):
