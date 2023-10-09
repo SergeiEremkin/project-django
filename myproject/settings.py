@@ -1,4 +1,5 @@
 import os
+
 """
 Django settings for myproject project.
 
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&#&qw+@x(s%wi0vs3tg-1%y-5w$+_jlc%cn8=v60ujx&#ixe!8'
+#SECRET_KEY = 'django-insecure-&#&qw+@x(s%wi0vs3tg-1%y-5w$+_jlc%cn8=v60ujx&#ixe!8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -32,14 +33,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 STATIC_ROOT = BASE_DIR / 'static/'
 
-
-
 ALLOWED_HOSTS = [
     '192.168.0.105'
     '127.0.0.1',
     'SergeiE.pythonanywhere.com',
 ]
-
 
 # Application definition
 
@@ -99,8 +97,16 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'SergeiE$default',
+        'USER': 'SergeiE',
+        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+        'HOST': 'SergeiE.mysql.pythonanywhere-services.com',
+        'OPTIONS': {
+            'init_command': "SET NAMES 'utf8mb4';"
+                            "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+        },
     }
 }
 
