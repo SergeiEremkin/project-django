@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('games_app.urls')),
     path('', include('internet_shop.urls')),
     path('', include('myapp2.urls')),
+    path('__debug__/', include("debug_toolbar.urls")),
 ]

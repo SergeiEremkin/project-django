@@ -1,3 +1,4 @@
+import os
 """
 Django settings for myproject project.
 
@@ -22,13 +23,33 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&#&qw+@x(s%wi0vs3tg-1%y-5w$+_jlc%cn8=v60ujx&#ixe!8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.0.105']
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+STATIC_ROOT = BASE_DIR / 'static/'
+
+
+
+ALLOWED_HOSTS = [
+    '192.168.0.105'
+    '127.0.0.1',
+    'SergeiE.pythonanywhere.com',
+]
+
 
 # Application definition
 
+INTERNAL_IPS = [
+    '192.168.0.105',
+    '127.0.0.1',
+]
+
 INSTALLED_APPS = [
+    'debug_toolbar',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,9 +60,11 @@ INSTALLED_APPS = [
     'myapp2',
     'games_app',
     'internet_shop',
+
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -165,6 +188,3 @@ LOGGING = {
         },
     },
 }
-
-
-
